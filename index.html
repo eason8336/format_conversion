@@ -99,7 +99,7 @@ async function send() {
   output.innerText = "Loading...";
 
   try {
-    const res = await fetch(fetch('/clean'));
+    const res = await fetch(fetch('/api/clean'));
 
     if (!res.ok) {
       throw new Error("HTTP錯誤: " + res.status);
