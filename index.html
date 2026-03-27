@@ -99,7 +99,7 @@ async function send() {
   output.innerText = "Loading...";
 
   try {
-    const res = await fetch(fetch('https://hcrmeapi.hic.com.tw/webhook/format-conversion', {
+    const res = await fetch('https://hcrmeapi.hic.com.tw/webhook/format-conversion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
