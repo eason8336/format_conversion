@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     const cleaned = data;
 
     // 呼叫 n8n Webhook
-    const webhookResp = await fetch('https://YOUR_N8N_DOMAIN/webhook/YOUR_PATH', {
+    const webhookResp = await fetch('https://hcrmeapi.hic.com.tw/webhook/format-conversion', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
