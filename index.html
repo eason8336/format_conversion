@@ -86,8 +86,6 @@ async function send() {
   const output = document.getElementById('output');
 
   let json;
-
-  // 檢查 JSON
   try {
     json = JSON.parse(input);
   } catch (e) {
@@ -99,21 +97,25 @@ async function send() {
   output.innerText = "Loading...";
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'cb557d70-6b1d-4402-ae1e-e62e5010bfd8'
       },
-      body: JSON.stringify(json)
+      body: JSON.stringify(json),
+      mode: 'cors',
+      signal: controller.signal
     });
 
-    if (!res.ok) {
-      throw new Error("HTTP錯誤: " + res.status);
-    }
+    clearTimeout(timeoutId);
+
+    if (!res.ok) throw new Error("HTTP錯誤: " + res.status);
 
     const data = await res.json();
-
     output.innerText = JSON.stringify(data, null, 2);
     setStatus("完成 ✅", false);
 
