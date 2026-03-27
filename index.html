@@ -59,7 +59,7 @@ button {
 
 <script>
 
-const webhookUrl = "";
+const webhookUrl = "https://hcrmeapi.hic.com.tw/webhook/format-conversion";
 
 // ✅ 格式化 JSON
 function formatJson() {
@@ -99,14 +99,14 @@ async function send() {
   output.innerText = "Loading...";
 
   try {
-    const res = await fetch('https://hcrmeapi.hic.com.tw/webhook/format-conversion', {
+    const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'cb557d70-6b1d-4402-ae1e-e62e5010bfd8'
       },
-      body: JSON.stringify(data)
-    }));
+      body: JSON.stringify(json)
+    });
 
     if (!res.ok) {
       throw new Error("HTTP錯誤: " + res.status);
